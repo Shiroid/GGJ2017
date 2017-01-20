@@ -24,7 +24,7 @@ public class KeyboardTest : MonoBehaviour {
         if (Input.GetKey(KeyCode.Alpha6)) spheres[3].SetActive(true);
         if (Input.GetKey(KeyCode.Space)) spheres[4].SetActive(true);
         if (Input.GetKey(KeyCode.K)) spheres[5].SetActive(true);
-        if (Input.GetKey(KeyCode.RightShift)) spheres[6].SetActive(true);
+        if (Input.GetKey(KeyCode.UpArrow)) spheres[6].SetActive(true);
         if (Input.GetKey(KeyCode.Alpha0)) spheres[7].SetActive(true);
     }
 }
