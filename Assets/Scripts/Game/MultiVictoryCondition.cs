@@ -6,6 +6,7 @@ public class MultiVictoryCondition : VictoryCondition {
 
     public GameObject[] alternateConditions;
 
+    override
     public bool isVictorious()
     {
         if (base.isVictorious()) return true;

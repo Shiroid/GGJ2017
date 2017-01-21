@@ -6,4 +6,6 @@ public static class GlobalVariables {
 
     public static bool canMove;
 
+    public static bool[] buttonsPressed = new bool[Config.numPlayers];
+
 }

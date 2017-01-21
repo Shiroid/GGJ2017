@@ -11,16 +11,13 @@ public class SpriteSwapper : CharacterController {
     {
         originalSprite = GetComponent<SpriteRenderer>().sprite;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    override
+    protected void setKeyDown(bool isDown)
     {
-        if (GlobalVariables.canMove)
-        {
-            if (Input.GetKeyDown(Config.playerKeys[playerIndex]))
-                GetComponent<SpriteRenderer>().sprite = altSprite;
-            if (Input.GetKeyUp(Config.playerKeys[playerIndex]))
-                GetComponent<SpriteRenderer>().sprite = originalSprite;
-        }
+        base.setKeyDown(isDown);
+        if (isKeyDown) GetComponent<SpriteRenderer>().sprite = altSprite;
+        else GetComponent<SpriteRenderer>().sprite = originalSprite;
     }
+
 }
