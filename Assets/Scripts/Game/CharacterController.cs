@@ -8,6 +8,15 @@ public class CharacterController : MonoBehaviour {
     public int characterIndex;
     protected bool isKeyDown;
 
+    public bool doRandomPose = false;
+    protected bool invertPose;
+
+    void Start()
+    {
+        invertPose = Random.value > 0.5f;
+        setKeyDown(false);
+    }
+
 
     public void SetPlayerIndex(int i)
     {
@@ -30,6 +39,7 @@ public class CharacterController : MonoBehaviour {
     virtual protected void setKeyDown(bool isDown)
     {
         isKeyDown = isDown;
-        GlobalVariables.buttonsPressed[characterIndex] = isDown;
+        if (doRandomPose && invertPose) isKeyDown = !isDown;
+        GlobalVariables.buttonsPressed[characterIndex] = isKeyDown;
     }
 }
