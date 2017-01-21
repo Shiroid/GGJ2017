@@ -13,33 +13,37 @@ public class PhotographerController : MonoBehaviour {
     public string nextScene = "Test Scene";
     public Text countdownUI;
     public AudioSource clock;
-    public SpriteRenderer Overlay;
+    private SpriteRenderer Overlay;
     public Object speechBaloon;
     private bool speech = false;
 
     public GameObject flash;
+
+    private bool hasFlashed;
 
 	// Use this for initialization
 	void Start () {
         remainingTime = waitTime + introTime;
         GlobalVariables.canMove = false;
         flash.SetActive(false);
+        Overlay = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         remainingTime -= Time.deltaTime;
-        countdownUI.text = Mathf.Round(remainingTime).ToString();
+        if(countdownUI) countdownUI.text = Mathf.Round(remainingTime).ToString();
         if (remainingTime < waitTime && remainingTime > 0)
         {
             //Allow movement
+            hasFlashed = false;
             GlobalVariables.canMove = true;
             if (!clock.isPlaying)
             {
                 clock.Play();
             }
         }
-        if (remainingTime < 0 && clock.isPlaying)
+        if (remainingTime < 0 && !hasFlashed)
         {
             //Snap photo
             if (flash) flash.SetActive(true);
@@ -50,11 +54,13 @@ public class PhotographerController : MonoBehaviour {
             speech = false;
             Overlay.color = new Color(1f, 1f, 1f, 0f);
         }
+
         if (remainingTime < -photoFreeze / 2 && !(GameObject.Find("TextbubbleTest(Clone)")))
         {
             Instantiate(speechBaloon);
         }
-            if (remainingTime < -photoFreeze)
+
+        if (remainingTime < -photoFreeze)
         {
             //Transition to next scene
             if (Config.savePhotos) Application.CaptureScreenshot(SceneManager.GetActiveScene().name + ".png");

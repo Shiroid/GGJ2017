@@ -7,11 +7,12 @@ public class SpriteFlasher : MonoBehaviour {
     private float opacity;
     public float flashTime = 0.3f;
     public float baseOpacity = 1f;
+    public AudioSource cameraClick;
 
     // Use this for initialization
     void OnEnable () {
         opacity = baseOpacity;
-        GetComponent<AudioSource>().Play();
+        cameraClick.Play();
 	}
 	
 	// Update is called once per frame
