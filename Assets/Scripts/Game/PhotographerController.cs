@@ -22,6 +22,8 @@ public class PhotographerController : MonoBehaviour {
 
     private bool hasFlashed;
 
+    private bool bubbleMade;
+
 	// Use this for initialization
 	void Start () {
         remainingTime = waitTime + introTime;
@@ -37,6 +39,7 @@ public class PhotographerController : MonoBehaviour {
         if (remainingTime < waitTime && remainingTime > 0)
         {
             //Allow movement
+            bubbleMade = false;
             hasFlashed = false;
             GlobalVariables.canMove = true;
             if (!clock.isPlaying)
@@ -57,13 +60,25 @@ public class PhotographerController : MonoBehaviour {
             
         }
 
-        if (remainingTime < -photoFreeze / 2)
+        if (remainingTime < -photoFreeze / 2 && !bubbleMade)
         {
+            bubbleMade = true;
             Debug.Log("werkt misschien");
-            if (victoryScript.isVictorious2())
-            { 
-                Instantiate(speechBaloon);
-                Debug.Log("werkt");
+            if (SceneManager.GetActiveScene().name == "Scene Two")
+            {
+                if (victoryScript.isVictorious2())
+                {
+                    Instantiate(speechBaloon);
+                    Debug.Log("werkt");
+                }
+            }
+            if (SceneManager.GetActiveScene().name == "Scene Three")
+            {
+                if (victoryScript.isVictorious3())
+                {
+                    Instantiate(speechBaloon);
+                    Debug.Log("werkt");
+                }
             }
         }
 

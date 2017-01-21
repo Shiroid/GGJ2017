@@ -17,17 +17,32 @@ public class VictoryCondition : MonoBehaviour {
     public virtual bool isVictorious2()
     {
         if (!GlobalVariables.buttonsPressed[0]) return false;
-        if (!GlobalVariables.buttonsPressed[1]) 
+        if (!GlobalVariables.buttonsPressed[1])
         {
-            if (!GlobalVariables.buttonsPressed[2]) return false; 
+            if (!GlobalVariables.buttonsPressed[2]) return false;
         }
         else
         {
-            if (!GlobalVariables.buttonsPressed[3])  return false; 
+            if (!GlobalVariables.buttonsPressed[3]) return false;
         }
-        if (!GlobalVariables.buttonsPressed[4]) return false; 
-        if (GlobalVariables.buttonsPressed[5]) return false; 
-        if (!GlobalVariables.buttonsPressed[7])  return false;
+        if (!GlobalVariables.buttonsPressed[4]) return false;
+        if (GlobalVariables.buttonsPressed[5]) return false;
+        if (!GlobalVariables.buttonsPressed[7]) return false;
+
+        return true;
+    }
+
+    public virtual bool isVictorious3()
+    {
+        if (GlobalVariables.buttonsPressed[1]) return false;
+        if (!GlobalVariables.buttonsPressed[2]) return false;
+        if (GlobalVariables.buttonsPressed[3])
+        {
+            if (!GlobalVariables.buttonsPressed[7]) return false;
+        }
+        if (!GlobalVariables.buttonsPressed[4]) return false;
+        if (GlobalVariables.buttonsPressed[5]) return false;
+        if (!GlobalVariables.buttonsPressed[6]) return false;
 
         return true;
     }
