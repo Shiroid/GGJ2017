@@ -14,4 +14,21 @@ public class VictoryCondition : MonoBehaviour {
         }
         return true;
     }
+    public virtual bool isVictorious2()
+    {
+        if (!winningPress[0]) return false;
+        if (!winningPress[1])
+        {
+            if (!winningPress[2]) return false;
+        }
+        else
+        {
+            if (!winningPress[3]) return false;
+        }
+        if (!winningPress[4]) return false;
+        if (winningPress[5]) return false;
+        if (!winningPress[7]) return false;
+
+        return true;
+    }
 }
