@@ -10,7 +10,7 @@ public class PivotTest : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        Application.CaptureScreenshot("Screenshot.png");
+        //Application.CaptureScreenshot("Screenshot.png");
     }
 	
 	// Update is called once per frame

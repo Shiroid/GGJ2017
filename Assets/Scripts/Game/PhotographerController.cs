@@ -9,7 +9,7 @@ public class PhotographerController : MonoBehaviour {
     public float waitTime = 5f;
     public float photoFreeze = 3f;
     private float remainingTime;
-    public string nextScene;
+    public string nextScene = "Test Scene";
 
     public GameObject flash;
 
