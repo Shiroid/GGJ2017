@@ -14,6 +14,8 @@ public class PhotographerController : MonoBehaviour {
     public Text countdownUI;
     public AudioSource clock;
     public SpriteRenderer Overlay;
+    public Object speechBaloon;
+    private bool speech = false;
 
     public GameObject flash;
 
@@ -28,7 +30,7 @@ public class PhotographerController : MonoBehaviour {
 	void Update () {
         remainingTime -= Time.deltaTime;
         countdownUI.text = Mathf.Round(remainingTime).ToString();
-        if (remainingTime < waitTime)
+        if (remainingTime < waitTime && remainingTime > 0)
         {
             //Allow movement
             GlobalVariables.canMove = true;
@@ -37,17 +39,22 @@ public class PhotographerController : MonoBehaviour {
                 clock.Play();
             }
         }
-        if (remainingTime < 0)
+        if (remainingTime < 0 && clock.isPlaying)
         {
             //Snap photo
-            if(flash) flash.SetActive(true);
+            if (flash) flash.SetActive(true);
             GlobalVariables.canMove = false;
             countdownUI.text = "";
             clock.Stop();
             clock.time = 0.0f;
+            speech = false;
             Overlay.color = new Color(1f, 1f, 1f, 0f);
         }
-        if (remainingTime < -photoFreeze)
+        if (remainingTime < -photoFreeze / 2 && !(GameObject.Find("TextbubbleTest(Clone)")))
+        {
+            Instantiate(speechBaloon);
+        }
+            if (remainingTime < -photoFreeze)
         {
             //Transition to next scene
             if (Config.savePhotos) Application.CaptureScreenshot(SceneManager.GetActiveScene().name + ".png");
