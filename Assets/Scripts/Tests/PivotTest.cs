@@ -9,12 +9,13 @@ public class PivotTest : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
+
+        Application.CaptureScreenshot("Screenshot.png");
+    }
 	
 	// Update is called once per frame
 	void Update () {
-
+        ConfigTest.t = 40;
         if (Input.GetKey(KeyCode.Space))
             bar.GetComponent<Rigidbody2D>().AddForceAtPosition(
                 Vector3.down*10, 
