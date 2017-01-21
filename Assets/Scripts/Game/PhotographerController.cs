@@ -13,7 +13,7 @@ public class PhotographerController : MonoBehaviour {
     public string nextScene = "Test Scene";
     public Text countdownUI;
     public AudioSource clock;
-    public SpriteRenderer Overlay;
+    private SpriteRenderer Overlay;
 
     public GameObject flash;
 
@@ -22,12 +22,13 @@ public class PhotographerController : MonoBehaviour {
         remainingTime = waitTime + introTime;
         GlobalVariables.canMove = false;
         flash.SetActive(false);
+        Overlay = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         remainingTime -= Time.deltaTime;
-        countdownUI.text = Mathf.Round(remainingTime).ToString();
+        if(countdownUI) countdownUI.text = Mathf.Round(remainingTime).ToString();
         if (remainingTime < waitTime)
         {
             //Allow movement
