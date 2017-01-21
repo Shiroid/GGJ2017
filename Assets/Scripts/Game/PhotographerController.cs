@@ -16,7 +16,7 @@ public class PhotographerController : MonoBehaviour {
     private SpriteRenderer Overlay;
     public Object speechBaloon;
     private bool speech = false;
-    public MultiVictoryCondition victoryScript;
+    public VictoryCondition victoryScript;
 
     public GameObject flash;
 
@@ -57,11 +57,13 @@ public class PhotographerController : MonoBehaviour {
             
         }
 
-        if (remainingTime < -photoFreeze / 2 && !(GameObject.Find("TextbubbleTest(Clone)")))
+        if (remainingTime < -photoFreeze / 2)
         {
-            if(victoryScript.isVictorious())
+            Debug.Log("werkt misschien");
+            if (victoryScript.isVictorious2())
             { 
                 Instantiate(speechBaloon);
+                Debug.Log("werkt");
             }
         }
 
