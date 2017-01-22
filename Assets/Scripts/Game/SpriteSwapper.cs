@@ -10,6 +10,7 @@ public class SpriteSwapper : CharacterController {
     void Start()
     {
         originalSprite = GetComponent<SpriteRenderer>().sprite;
+        Initialize();
     }
 
     override

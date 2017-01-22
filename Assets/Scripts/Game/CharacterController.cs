@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour {
 
-    protected int playerIndex;
+    protected int playerIndex = -1;
     public int characterIndex;
     protected bool isKeyDown;
 
@@ -13,10 +13,15 @@ public class CharacterController : MonoBehaviour {
 
     void Start()
     {
-        invertPose = Random.value > 0.5f;
-        setKeyDown(false);
+        Initialize();
     }
 
+    protected void Initialize()
+    {
+        invertPose = Random.value > 0.5f;
+        if (playerIndex < 0) playerIndex = characterIndex;
+        setKeyDown(false);
+    }
 
     public void SetPlayerIndex(int i)
     {
