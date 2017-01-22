@@ -17,4 +17,6 @@ public static class Config {
         KeyCode.Semicolon };
 
     public static bool savePhotos = false;
+
+    public static float victoryCameraScale = 1.3f;
 }

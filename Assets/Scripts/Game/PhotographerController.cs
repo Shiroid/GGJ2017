@@ -21,12 +21,18 @@ public class PhotographerController : MonoBehaviour {
 
     public GameObject flash;
 
-    private bool hasFlashed;
+    private bool hasFlashed = false;
+    private bool bubbleMade = false;
+    private bool victorious = false;
 
-    private bool bubbleMade;
+    private float cameraScale = 1.0f;
+    private float scaleSpeed = 0.04f;
+    private float minScaleSpeed = 0.001f;
 
-	// Use this for initialization
-	void Start () {
+    public Camera camera;
+
+    // Use this for initialization
+    void Start () {
         remainingTime = waitTime + introTime;
         GlobalVariables.canMove = false;
         flash.SetActive(false);
@@ -40,8 +46,6 @@ public class PhotographerController : MonoBehaviour {
         if (remainingTime < waitTime && remainingTime > 0)
         {
             //Allow movement
-            bubbleMade = false;
-            hasFlashed = false;
             GlobalVariables.canMove = true;
             if (!clock.isPlaying)
             {
@@ -61,52 +65,45 @@ public class PhotographerController : MonoBehaviour {
             
         }
 
-        if (remainingTime < -photoFreeze / 2 && !bubbleMade)
+        if (remainingTime < -photoFreeze / 2)
         {
-            bubbleMade = true;
-            if (SceneManager.GetActiveScene().name == "Scene Two")
+            if (!bubbleMade)
             {
-                if (victoryScript.isVictorious2())
+                bubbleMade = true;
+
+                switch (SceneManager.GetActiveScene().name)
                 {
-                    Instantiate(speechBaloon);
+                    case "Scene Two":
+                        victorious = victoryScript.isVictorious2();
+                        break;
+                    case "Scene Three":
+                        victorious = victoryScript.isVictorious3();
+                        break;
+                    case "Scene Four":
+                        victorious = victoryScript.isVictorious4();
+                        break;
+                    case "Scene Five":
+                        victorious = victoryScript.isVictorious5();
+                        break;
+                }
+
+                if (victorious)
+                {
+                    //Instantiate(speechBaloon);
                 }
                 else
                 {
                     buzzer.Play();
                 }
             }
-            if (SceneManager.GetActiveScene().name == "Scene Three")
+
+            if(victorious && cameraScale < Config.victoryCameraScale)
             {
-                if (victoryScript.isVictorious3())
-                {
-                    Instantiate(speechBaloon);
-                }
-                else
-                {
-                    buzzer.Play();
-                }
-            }
-            if (SceneManager.GetActiveScene().name == "Scene Four")
-            {
-                if (victoryScript.isVictorious4())
-                {
-                    Instantiate(speechBaloon);
-                }
-                else
-                {
-                    buzzer.Play();
-                }
-            }
-            if (SceneManager.GetActiveScene().name == "Scene Five")
-            {
-                if (victoryScript.isVictorious5())
-                {
-                    Instantiate(speechBaloon);
-                }
-                else
-                {
-                    buzzer.Play();
-                }
+                float relScale = 1f + Mathf.Max(( 
+                    Mathf.Min(Mathf.Abs(cameraScale - Config.victoryCameraScale), Mathf.Abs(cameraScale - 1f)) * scaleSpeed),
+                     minScaleSpeed);
+                cameraScale *= relScale;
+                camera.orthographicSize *= relScale;
             }
         }
 
@@ -114,7 +111,8 @@ public class PhotographerController : MonoBehaviour {
         {
             //Transition to next scene
             if (Config.savePhotos) Application.CaptureScreenshot(SceneManager.GetActiveScene().name + ".png");
-            SceneManager.LoadScene(nextScene);
+            if(victorious) SceneManager.LoadScene(nextScene);
+            else SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             Overlay.color = new Color(1f, 1f, 1f, 1f);
         }
 	}
