@@ -18,6 +18,7 @@ public class PhotographerController : MonoBehaviour {
     public Object speechBaloon;
     private bool speech = false;
     public VictoryCondition victoryScript;
+    public Object actionText;
 
     public GameObject flash;
 
@@ -41,6 +42,11 @@ public class PhotographerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Main Menu");
+        }
+
         remainingTime -= Time.deltaTime;
         if(countdownUI) countdownUI.text = Mathf.Round(remainingTime).ToString();
         if (remainingTime < waitTime && remainingTime > 0)
@@ -90,6 +96,7 @@ public class PhotographerController : MonoBehaviour {
                 if (victorious)
                 {
                     //Instantiate(speechBaloon);
+                    Instantiate(actionText);
                 }
                 else
                 {
@@ -113,7 +120,6 @@ public class PhotographerController : MonoBehaviour {
             if (Config.savePhotos) Application.CaptureScreenshot(SceneManager.GetActiveScene().name + ".png");
             if(victorious) SceneManager.LoadScene(nextScene);
             else SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            Overlay.color = new Color(1f, 1f, 1f, 1f);
         }
 	}
 }
