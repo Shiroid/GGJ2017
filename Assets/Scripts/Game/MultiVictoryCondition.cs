@@ -17,4 +17,14 @@ public class MultiVictoryCondition : VictoryCondition {
         }
         return false;
     }
+    public bool isVictorious2()
+    {
+        if (base.isVictorious()) return true;
+
+        for (int i = 0; i < alternateConditions.Length; i++)
+        {
+            if (alternateConditions[i].GetComponent<VictoryCondition>().isVictorious()) return true;
+        }
+        return false;
+    }
 }
