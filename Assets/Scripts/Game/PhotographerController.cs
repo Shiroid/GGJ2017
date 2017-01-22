@@ -63,13 +63,11 @@ public class PhotographerController : MonoBehaviour {
         if (remainingTime < -photoFreeze / 2 && !bubbleMade)
         {
             bubbleMade = true;
-            Debug.Log("werkt misschien");
             if (SceneManager.GetActiveScene().name == "Scene Two")
             {
                 if (victoryScript.isVictorious2())
                 {
                     Instantiate(speechBaloon);
-                    Debug.Log("werkt");
                 }
             }
             if (SceneManager.GetActiveScene().name == "Scene Three")
@@ -77,7 +75,20 @@ public class PhotographerController : MonoBehaviour {
                 if (victoryScript.isVictorious3())
                 {
                     Instantiate(speechBaloon);
-                    Debug.Log("werkt");
+                }
+            }
+            if (SceneManager.GetActiveScene().name == "Scene Four")
+            {
+                if (victoryScript.isVictorious4())
+                {
+                    Instantiate(speechBaloon);
+                }
+            }
+            if (SceneManager.GetActiveScene().name == "Scene Five")
+            {
+                if (victoryScript.isVictorious5())
+                {
+                    Instantiate(speechBaloon);
                 }
             }
         }

@@ -57,4 +57,43 @@ public class VictoryCondition : MonoBehaviour {
 
         return result;
     }
+
+    public virtual bool isVictorious4()
+    {
+        bool result = true;
+        if (GlobalVariables.buttonsPressed[0]) result = markError(0);
+        if (!GlobalVariables.buttonsPressed[1]) result = markError(1);
+        if (GlobalVariables.buttonsPressed[2]) result = markError(2);
+        if (!GlobalVariables.buttonsPressed[3] && !GlobalVariables.buttonsPressed[2])
+            result = markError(3);
+
+
+        if (GlobalVariables.buttonsPressed[5]) result = markError(4);
+        if (!GlobalVariables.buttonsPressed[5] && 
+            (!GlobalVariables.buttonsPressed[4] || !GlobalVariables.buttonsPressed[6]))
+                result = markError(5);
+
+        if (GlobalVariables.buttonsPressed[4] && !GlobalVariables.buttonsPressed[7])
+            result = markError(6);
+
+        return result;
+    }
+
+    public virtual bool isVictorious5()
+    {
+        bool result = true;
+        if (GlobalVariables.buttonsPressed[0]) result = markError(0);
+        if (GlobalVariables.buttonsPressed[4]) result = markError(1);
+        if (!GlobalVariables.buttonsPressed[1]) result = markError(2);
+        if (GlobalVariables.buttonsPressed[2])
+        {
+            result = markError(3);
+            result = markError(4);
+        }
+        if (!GlobalVariables.buttonsPressed[3]) result = markError(5);
+        if (!GlobalVariables.buttonsPressed[5]) result = markError(6);
+        if (GlobalVariables.buttonsPressed[7] && !GlobalVariables.buttonsPressed[6]) result = markError(7);
+
+        return result;
+    }
 }
