@@ -13,7 +13,7 @@ public class Keybinder : MonoBehaviour {
 
     private string notification = "Keys have been bound";
 
-    public string returnScene = "Test Scene";
+    public string returnScene = "Main Menu";
 	
 	// Update is called once per frame
 	void Update ()

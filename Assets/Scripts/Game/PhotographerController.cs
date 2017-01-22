@@ -13,6 +13,7 @@ public class PhotographerController : MonoBehaviour {
     public string nextScene = "Test Scene";
     public Text countdownUI;
     public AudioSource clock;
+    public AudioSource buzzer;
     private SpriteRenderer Overlay;
     public Object speechBaloon;
     private bool speech = false;
@@ -69,12 +70,20 @@ public class PhotographerController : MonoBehaviour {
                 {
                     Instantiate(speechBaloon);
                 }
+                else
+                {
+                    buzzer.Play();
+                }
             }
             if (SceneManager.GetActiveScene().name == "Scene Three")
             {
                 if (victoryScript.isVictorious3())
                 {
                     Instantiate(speechBaloon);
+                }
+                else
+                {
+                    buzzer.Play();
                 }
             }
             if (SceneManager.GetActiveScene().name == "Scene Four")
@@ -83,12 +92,20 @@ public class PhotographerController : MonoBehaviour {
                 {
                     Instantiate(speechBaloon);
                 }
+                else
+                {
+                    buzzer.Play();
+                }
             }
             if (SceneManager.GetActiveScene().name == "Scene Five")
             {
                 if (victoryScript.isVictorious5())
                 {
                     Instantiate(speechBaloon);
+                }
+                else
+                {
+                    buzzer.Play();
                 }
             }
         }
